@@ -1,3 +1,5 @@
+/.angular/cache
+
 .DS_STORE
 
 /dist/
