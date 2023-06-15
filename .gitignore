@@ -1,4 +1,6 @@
 /.angular/cache
+.angular
+.angular/cache
 
 .DS_STORE
 
