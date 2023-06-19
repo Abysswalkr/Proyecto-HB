@@ -5,15 +5,17 @@ interface ErrorMessages {
 }
 
 const ERROR_MESSAGES: ErrorMessages = {
-  required: 'this field is required',
-  email: 'invalid email',
-  minlength: 'minimum length is',
-  maxlength: 'maximum length is',
-  pattern: 'invalid format',
-  nonNullable: 'this field is required',
-  min: 'minimum value is',
-  max: 'maximum value is',
-  nameAlreadyExists: 'name already exists',
+  required: 'campo requerido',
+  email: 'email inválido',
+  minlength: 'lontigud mínima es',
+  maxlength: 'longitud máxima es',
+  pattern: 'formato inválido',
+  nonNullable: 'campo requerido',
+  min: 'valor mínimo es',
+  max: 'valor máximo es',
+  nameAlreadyExists: 'nombre ya existe',
+  invalidCred: 'correo o contraseña inválidos',
+  unknown: 'error desconocido, intente de nuevo',
 };
 
 export abstract class ReactiveFormComponent {
@@ -23,6 +25,10 @@ export abstract class ReactiveFormComponent {
 
   resetForm(value?: any) {
     this.form.reset(value);
+  }
+
+  setFormErrors(formControlName: string, errors: ValidationErrors) {
+    this.form.get(formControlName)?.setErrors(errors);
   }
 
   get validForm() {
