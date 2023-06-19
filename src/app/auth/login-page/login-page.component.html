@@ -4,7 +4,7 @@
             Iniciar sesión
         </div>
         <div class="mt-8">
-            <form autoComplete="off">
+            <form autoComplete="off" [formGroup]="form" (ngSubmit)="login()">
                 <div class="flex flex-col mb-2">
                     <div class="flex relative">
                         <span class="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -13,7 +13,7 @@
                                 </path>
                             </svg>
                         </span>
-                        <input type="text" class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" placeholder="Correo"/>
+                        <input formControlName="email" type="text" class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" placeholder="Correo"/>
                         </div>
                     </div>
                     <div class="flex flex-col mb-6">
@@ -24,7 +24,7 @@
                                     </path>
                                 </svg>
                             </span>
-                            <input type="password" class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" placeholder="Contraseña"/>
+                            <input formControlName="password" type="password" class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" placeholder="Contraseña"/>
                             </div>
                         </div>
                         <div class="flex items-center mb-6 -mt-4">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="flex w-full">
-                            <button class="py-2 px-4  bg-green-800 hover:bg-green-900 focus:ring-green-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                            <button type="submit" class="py-2 px-4  bg-green-800 hover:bg-green-900 focus:ring-green-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                                 Ingresar
                             </button>
                         </div>
