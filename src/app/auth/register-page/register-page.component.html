@@ -5,24 +5,39 @@
             Crear cuenta
         </div>
         <div class="mt-8">
-            <form autoComplete="off">
-                <div class="flex mb-2 gap-2">
-                    <div class="flex relative">
-                        <span
-                            class="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z" />
-                            </svg>
-                        </span>
-                        <input type="text"
-                            class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                            placeholder="Nombre" />
+            <form autoComplete="off" [formGroup]="form" (ngSubmit)="register()">
+                <div class="flex flex-col w-full gap-0 mb-2 ">
+                    <div class="flex gap-2">
+                        <div class="flex relative">
+                            <span
+                                class="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z" />
+                                </svg>
+                            </span>
+                            <input type="text" formControlName="firstName"
+                                class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                                placeholder="Nombre" />
+                        </div>
+
+                        <div class="flex relative">
+                            <input type="text" formControlName="lastName"
+                                class=" rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                                placeholder="Apellido" />
+                        </div>
                     </div>
-                    <div class="flex relative">
-                        <input type="text"
-                            class=" rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                            placeholder="Apellido" />
+
+                    <div class="flex w-full justify-end">
+                        <div *ngIf="formErrorMessage('firstName') || formErrorMessage('lastName')" class="w-full">
+                            <div *ngIf="formErrorMessage('firstName')" class="text-xs text-red-400 italic w-full">
+                                {{ formErrorMessage('firstName') }}
+                            </div>
+                        </div>
+                        <div *ngIf="formErrorMessage('lastName')" class="text-xs text-red-400 italic w-full ml-9 pl-0.5">
+                            {{ formErrorMessage('lastName') }}
+                        </div>
                     </div>
                 </div>
                 <div class="flex flex-col mb-2">
@@ -36,9 +51,12 @@
                                 </path>
                             </svg>
                         </span>
-                        <input type="text"
+                        <input type="text" formControlName="email"
                             class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                             placeholder="Correo" />
+                    </div>
+                    <div *ngIf="formErrorMessage('email')" class="text-xs text-red-400 italic w-full">
+                        {{ formErrorMessage('email') }}
                     </div>
                 </div>
                 <div class="flex flex-col mb-6">
@@ -52,13 +70,16 @@
                                 </path>
                             </svg>
                         </span>
-                        <input type="password"
+                        <input type="password" formControlName="password"
                             class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                             placeholder="Contraseña" />
                     </div>
+                    <div *ngIf="formErrorMessage('password')" class="text-xs text-red-400 italic w-full">
+                        {{ formErrorMessage('password') }}
+                    </div>
                 </div>
                 <div class="flex w-full">
-                    <button
+                    <button type="submit"
                         class="py-2 px-4  bg-green-800 hover:bg-green-900 focus:ring-green-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                         Registrarse
                     </button>

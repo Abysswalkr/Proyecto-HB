@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthApiError } from '@supabase/supabase-js';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReactiveFormComponent } from 'src/models/reactive_form';
 
@@ -15,7 +16,7 @@ import { ReactiveFormComponent } from 'src/models/reactive_form';
 })
 export class LoginPageComponent extends ReactiveFormComponent implements OnInit {
 
-  constructor (private router: Router, private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor (private router: Router, private formBuilder: FormBuilder, private authService: AuthService, private toasterService: ToastrService) {
     super();
   }
 
@@ -46,7 +47,9 @@ export class LoginPageComponent extends ReactiveFormComponent implements OnInit 
       else this.setFormErrors('email', { unknown: true });
       return;
     }
-    //this.router.navigate(['/']);
+
+    this.toasterService.success('ingreso exitoso', '', {tapToDismiss: false});   
+    this.router.navigateByUrl('/dashboard');
   }
 
 }

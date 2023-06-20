@@ -16,6 +16,7 @@ const ERROR_MESSAGES: ErrorMessages = {
   nameAlreadyExists: 'nombre ya existe',
   invalidCred: 'correo o contraseña inválidos',
   unknown: 'error desconocido, intente de nuevo',
+  emailAlreadyExists: 'correo ya registrado',
 };
 
 export abstract class ReactiveFormComponent {

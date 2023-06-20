@@ -7,6 +7,8 @@ import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { RegisterPageComponent } from './auth/register-page/register-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { RegisterPageComponent } from './auth/register-page/register-page.compon
     LoginPageComponent,
     HomeComponent,
     RegisterPageComponent,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

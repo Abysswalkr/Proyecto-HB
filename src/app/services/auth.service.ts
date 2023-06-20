@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AuthApiError, SignUpWithPasswordCredentials, SupabaseClient, User } from '@supabase/supabase-js';
+import { AuthApiError, Session, SignUpWithPasswordCredentials, SupabaseClient, User } from '@supabase/supabase-js';
 import { BehaviorSubject } from 'rxjs';
+import { UserRole } from 'src/models/domain_user';
 import { Supabase } from 'src/models/supabase.client';
 
 export interface SignUpParams {
@@ -15,18 +16,13 @@ export interface SignUpParams {
 })
 export class AuthService {
   private client: SupabaseClient = Supabase.getInstance();
-  private userSubject = new BehaviorSubject<User | null>(null);
 
   constructor() { }
   
-  private setSession() {
-    const session = localStorage.getItem('session') as User | null;
-    if (session) this.userSubject.next(session as User);
+  private setSession(session: Session) {
+    localStorage.setItem('session', session.access_token);
   }
-  
-  get user() {
-    return this.userSubject.asObservable();
-  }
+
   
   async login(email: string, passowrd: string) : Promise<User | AuthApiError> {
     try {
@@ -35,8 +31,8 @@ export class AuthService {
       });
       if (error) throw error;
       
-      this.setSession();
-      return data.user
+      this.setSession(data.session);
+      return data.user;
 
     } catch (error) {
       return error as AuthApiError;
@@ -58,8 +54,11 @@ export class AuthService {
     try {
       const { data, error } = await this.client.auth.signUp(params);
       if (error) throw error;
-      
-      this.setSession();
+        
+      await this.client.from('profiles')
+        .update({ first_name: firstName, last_name: lastName, role: UserRole.Normal, full_name: `${firstName} ${lastName}` })
+        .eq('id', data.user?.id)
+
       return data.user
 
     } catch (error) {
@@ -69,6 +68,7 @@ export class AuthService {
   }
   
   signOut() {
+    localStorage.removeItem('session');
     return this.client.auth.signOut()
   }
 }
